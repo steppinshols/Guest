@@ -657,7 +657,7 @@ functions["main"] = function()
 end
 
 
-local ClickRate = 1/60 --1/fps
+local ClickRate = 2/120 --1/fps
 local Keybind = Enum.KeyCode.Q
 --------------------------------------------
 local Players = game:GetService("Players")
