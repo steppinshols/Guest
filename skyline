@@ -458,20 +458,30 @@ functions["bypasshit"] = function(Hitter,Target,Delay,Delay2,Fake)
         FakeTouching[Target] = Target
         local ToHit = {Hitter,unpack(Fake)}
         
-        FakeTouching[Target] = true
-        
         for _,v in pairs(ToHit) do
             firetouchinterest(v,Target,0)
         end
-        
-        FakeTouching[Target] = false
+        if Delay then
+            wait(Delay)
+        end
+        FakeTouching[Target] = true
+        wait()
+        spawn(function()
+            if Delay2 then
+                wait(Delay2)
+            end
+            FakeTouching[Target] = nil
+        end)
+        for _,v in pairs(ToHit) do
+            firetouchinterest(v,Target,1)
         end
     end
+end
 
 functions["hit"] = function(Hitter,FakeHandles,Target)
     local mode = Skyline_settings.damage_mode
     if mode == "bypass" then
-        functions["bypasshit"](Hitter,Target,1,1,FakeHandles)
+        functions["bypasshit"](Hitter,Target,0.2,0.2,FakeHandles)
 		end
 	end
 
