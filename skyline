@@ -966,6 +966,28 @@ hook = hookfunc(getrenv().wait, newcclosure(function(...)
 end))
 
 
+
+local HealthHook
+HealthHook = hookmetamethod(game, "__index", function(z, x)
+    if not checkcaller() then
+        if tostring(z) == "Humanoid" and tostring(x) == "Health" then
+            return 0
+        end
+    end
+    return HealthHook(z, x)
+end)
+
+local MagHook
+MagHook = hookmetamethod(game, "__index", function(self, d)
+    if not checkcaller() then
+        if tostring(d) == "Magnitude" or tostring(d) == "magnitude" then
+            return 2
+        end
+    end
+    return MagHook(self, d)
+end)
+
+
 -- UI
 
 
